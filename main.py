@@ -31,14 +31,16 @@ parametres_reseau = lire_reseau()
 if parametres_reseau['auto']:
     accueil(minitel, attendre=False)
     minitel.position(1,0)
-    minitel.envoyer('Connexion automatique ...')
-    item = 16
+    minitel.envoyer('Connexion automatique... ')
 else:
     accueil(minitel)
-    item = 0
 
 # on définit l'objet utilisé pour les opérations de réseau
 reseau = Reseau(parametres_reseau)
+if parametres_reseau['auto']:
+    item = 16 if reseau.isconnected() else 9
+else:
+    item = 0
 
 # on affiche le menu principal
 while True:
